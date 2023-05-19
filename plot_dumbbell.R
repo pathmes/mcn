@@ -36,7 +36,10 @@ geom_segment(data = stw,
 aes(x=agegp, xend=agegp, y=y2021, yend=y2022), color="grey", linewidth = 4) +
   geom_point(size = 4, show.legend = FALSE) +
   scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) +
-ylim(4,12) +
+  geom_text(aes(label = round(stunt, 1)),
+            vjust = -1.5, hjust = .5,
+            show.legend = FALSE) +
+  ylim(4,12) +
 coord_flip()+
 theme_minimal(base_size = 16) +
 xlab("") +
@@ -46,7 +49,10 @@ waste <- ggplot(data = ntmnth_age, aes(x = agegp, y = waste, colour = year)) +
   geom_segment(data = wtw,
                aes(x=agegp, xend=agegp, y=y2021, yend=y2022), color="grey", linewidth = 4) +
   geom_point(size = 4, show.legend = FALSE) + 
-  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) +
+  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) + 
+  geom_text(aes(label = round(waste, 1)),
+            vjust = -1.5, hjust = .5,
+            show.legend = FALSE) +
   ylim(4,13) +
   coord_flip()+
   theme_minimal(base_size = 16) +
@@ -57,7 +63,10 @@ under <- ggplot(data = ntmnth_age, aes(x = agegp, y = underwt, colour = year)) +
   geom_segment(data = utw,
                aes(x=agegp, xend=agegp, y=y2021, yend=y2022), color="grey", linewidth = 4) +
   geom_point(size = 4, show.legend = TRUE) + 
-  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) +
+  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) + 
+  geom_text(aes(label = round(underwt, 1)),
+            vjust = -1.5, hjust = .5,
+            show.legend = FALSE) +
   ylim(5,20) +
   coord_flip()+
   theme_minimal(base_size = 16) +
@@ -71,7 +80,10 @@ under <- ggplot(data = ntmnth_age, aes(x = agegp, y = underwt, colour = year)) +
   geom_segment(data = utw,
                aes(x=agegp, xend=agegp, y=y2021, yend=y2022), color="grey", linewidth = 4) +
   geom_point(size = 4, show.legend = FALSE) + 
-  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) +
+  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) + 
+  geom_text(aes(label = round(underwt, 1)),
+            vjust = -1.5, hjust = .5,
+            show.legend = FALSE) +
   ylim(5,20) +
   coord_flip()+
   theme_minimal(base_size = 16) +
