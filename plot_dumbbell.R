@@ -94,4 +94,47 @@ p3 <- plot_grid(stunt, waste, under, nrow = 1)
 
 p3l <- plot_grid(p3, legend, ncol = 2, rel_widths = c(1, .1))
 
-ggsave("nweek2023_22.jpg", width = 12, height = 3)
+# ggsave("nweek2023_22.jpg", width = 12, height = 3)
+
+
+# Enter data
+ntmnth_overall <- tribble(
+  ~year, ~Stunting, ~Wasting, ~Underweight,
+  2022, 9.2, 10.1, 15.3,
+  2021, 7.4, 8.2, 12.2
+)
+ntmnth_overall <- ntmnth_overall %>% mutate(year = factor(year))
+
+
+overall <- ntmnth_overall[-1] %>%
+  t() %>% 
+  as.data.frame() %>% 
+  setNames(c("y2022", "y2021")) %>% 
+  tibble::rownames_to_column(var = "ind")
+
+
+overall <- overall %>% mutate(ind = factor(ind)) %>% 
+  mutate(ind=fct_relevel(ind,c("Stunting", "Wasting", "Underweight"))) 
+
+overall_l <- overall %>% 
+  pivot_longer(cols = starts_with("y"), names_to = "year", names_prefix = "y")
+
+
+po <- ggplot(data = overall_l, aes(x = ind, y = value, colour = year)) +
+  geom_segment(data = overall,
+               aes(x=ind, xend=ind, y=y2021, yend=y2022), color="grey", linewidth = 4) +
+  geom_point(size = 4, show.legend = FALSE) +
+  scale_color_manual(values = c("2021" = "darkgreen", "2022" = "maroon")) +
+  geom_text(aes(label = round(value, 1)),
+            vjust = -1.5, hjust = .5,
+            show.legend = FALSE) +
+  ylim(6,16) +
+  coord_flip()+
+  theme_minimal(base_size = 16) +
+  xlab("") +
+  ylab("Percentage of under 5 children")
+
+p02 <- plot_grid(po, legend, ncol = 2, rel_widths = c(1, .25))
+
+# ggsave("overal2.jpg", width = 6, height = 3)
+
