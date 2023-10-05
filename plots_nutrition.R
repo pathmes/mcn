@@ -53,7 +53,14 @@ ggplot(data = dhs_sdg, mapping = aes(x = year, y = Percent, group = ind)) +
   scale_color_manual("", values=c("#CC6666", "#9999CC"),
                      breaks = c("stunt", "waste"),
                      labels = c("Stunted", "Wasted")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom")+
+  geom_text(
+    aes(label = Percent),
+    vjust = -0.3,
+    color = "black",
+    position = position_dodge(2),
+    size = 5
+  )
 
 # nm_trend
 ggplot(data = ntmnth_sdg, mapping = aes(x = year, y = Percent, group = ind)) +
@@ -67,4 +74,11 @@ ggplot(data = ntmnth_sdg, mapping = aes(x = year, y = Percent, group = ind)) +
                      name = "",
                      breaks = c("stunt", "waste"),
                      labels = c("Stunted", "Wasted")) +
-  theme(legend.position = "bottom")
+  theme(legend.position = "bottom") +
+  geom_text(
+    aes(label = Percent),
+    vjust = -0.3,
+    color = "black",
+    position = position_dodge(.3),
+    size = 5
+  )
